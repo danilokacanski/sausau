@@ -20,8 +20,8 @@ class KNNClassfier:
         distances = [self._euclidean_distance(x, x_train) for x_train in self.X_train]
 
         k_indices = np.argsort(distances)[: self.k]
-
         k_nearest_labels = [self.y_train[i] for i in k_indices]
 
+        # returns [most_commont, num_of_occurences]
         most_common = Counter(k_nearest_labels).most_common(1)
         return most_common[0][0]

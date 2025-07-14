@@ -9,7 +9,6 @@ from knn_classifier import KNNClassfier
 def run_on_custom(k, X_train, y_train, X_test):
     model = KNNClassfier(k)
     model.fit(X_train, y_train)
-    y_pred = model.predict(X_test)
 
     plt.figure(figsize=(12, 5))
 
@@ -28,6 +27,9 @@ def run_on_custom(k, X_train, y_train, X_test):
     plt.legend()
     plt.show()
 
+    # 2nd plot - after classification
+
+    y_pred = model.predict(X_test)
     for x, y in zip(X_train, y_train):
         plt.scatter(
             x[0],
@@ -80,7 +82,19 @@ y_train = [0] * 5 + [1] * 5
 
 X_test = [[4, 4], [5, 6]]
 
-k = 5  # different for k = 4 i k = 5
-# run_on_custom(k=k, X_train=X_train, y_train=y_train, X_test=X_test)
+# Plot of custom dataset
+# plt.figure(figsize=(12, 5))
 
-run_on_iris(k=3)  # run from k = 1 to k = 4
+# for x, y in zip(X_train, y_train):
+#     plt.scatter(
+#         x[0],
+#         x[1],
+#         c="red" if y == 0 else "blue",
+#     )
+
+# plt.show()
+
+k = 5  # different for k = 3 i k = 5
+run_on_custom(k=k, X_train=X_train, y_train=y_train, X_test=X_test)
+
+# run_on_iris(k=4)  # run from k = 1 to k = 4
