@@ -10,6 +10,7 @@ class KMeansClustering:
         self.max_iters = max_iters
         self.centroids = []
         self.X = None
+        self.labels = None
 
     def fit(self, X):
         self.X = np.array(X)
@@ -19,7 +20,7 @@ class KMeansClustering:
         self.centroids = self.X[random_indices]
 
         for iteration in range(self.max_iters):
-            self.labels = self._assign_clusters(self.X)
+            self.labels = self._assign_clusters()
 
             previous_centroids = self.centroids.copy()
 
@@ -34,10 +35,10 @@ class KMeansClustering:
                 print(f"Converged at iteration {iteration}")
                 break
 
-    def _assign_clusters(self, X):
+    def _assign_clusters(self):
         labels = []
 
-        for point in X:
+        for point in self.X:
             min_distance = float("inf")
             closest_cluster = None
 
@@ -65,9 +66,9 @@ class KMeansClustering:
                 self.centroids[i, 0],
                 self.centroids[i, 1],
                 color=cmap(i),
-                marker="o",
+                marker="X",
                 edgecolors="black",
-                s=100,
+                s=200,
                 label=f"Centroid {i}",
             )
 
