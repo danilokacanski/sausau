@@ -23,18 +23,24 @@ def tune_knn():
         test_scores_knn.append(knn.score(X_test, y_test))
 
     plt.figure(figsize=(10, 4))
-    plt.plot(k_range, train_scores_knn, label="Train Accuracy", marker="o")
-    plt.plot(k_range, test_scores_knn, label="Test Accuracy", marker="o")
+    plt.plot(
+        k_range,
+        [1 - score for score in test_scores_knn],
+        marker="o",
+    )
     plt.xlabel("Number of Neighbors (k)")
-    plt.ylabel("Accuracy")
-    plt.title("Accuracy vs K")
+    plt.ylabel("Error")
     plt.legend()
     plt.grid(True)
     plt.show()
 
 
 def tune_rf():
-    param_grid_rf = {"n_estimators": [10, 50, 100, 200], "max_depth": [None, 5, 10, 20]}
+    param_grid_rf = {
+        "n_estimators": [10, 50, 100, 200],
+        "max_depth": [None, 5, 10, 20],
+        "criterion": ["entropy", "gini"],
+    }
 
     rf = RandomForestClassifier(random_state=42)
     grid_search_rf = GridSearchCV(
