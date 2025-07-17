@@ -7,7 +7,9 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
 
 
-X, y = load_breast_cancer(return_X_y=True)
+data = load_breast_cancer()
+X, y = data.data, data.target
+feature_names = data.feature_names
 X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=42)
 
 
@@ -43,9 +45,7 @@ def tune_rf():
     }
 
     rf = RandomForestClassifier(random_state=42)
-    grid_search_rf = GridSearchCV(
-        rf, param_grid_rf, cv=5, scoring="accuracy", return_train_score=True
-    )
+    grid_search_rf = GridSearchCV(rf, param_grid_rf, cv=5, scoring="accuracy")
     grid_search_rf.fit(X_train, y_train)
     print("Best parameters:", grid_search_rf.best_params_)
 
@@ -53,3 +53,7 @@ def tune_rf():
     best_rf = grid_search_rf.best_estimator_
     y_pred_rf = best_rf.predict(X_test)
     print("Test accuracy:", accuracy_score(y_test, y_pred_rf))
+
+    importances = best_rf.feature_importances_
+    for name, importance in zip(feature_names, importances):
+        print(f"{name}: {importance:.4f}")
