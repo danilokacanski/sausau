@@ -51,4 +51,5 @@ ax[1].set_title("Accuracy / ccp_alpha")
 ax[1].legend()
 
 plt.tight_layout()
+plt.grid()
 plt.show()

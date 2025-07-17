@@ -56,4 +56,4 @@ def tune_rf():
 
     importances = best_rf.feature_importances_
     for name, importance in zip(feature_names, importances):
-        print(f"{name}: {importance:.4f}")
+        print(f"{name}: {importance:.2f}")
