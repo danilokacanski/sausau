@@ -9,7 +9,7 @@ def visualize_iris(iris_dataset):
     y = iris_dataset.target
 
     for i, target_name in enumerate(iris_dataset.target_names):
-        plt.scatter(X[y == i, 2], X[y == i, 3], label=target_name)
+        plt.scatter(X[y == i, 1], X[y == i, 3], label=target_name)
 
     plt.xlabel("Petal length (cm)")
     plt.ylabel("Petal width (cm)")
